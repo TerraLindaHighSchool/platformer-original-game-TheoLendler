@@ -10,14 +10,21 @@ public class AcidRain extends Obstacle
 {
     private float yVelocity;
     private final float GRAVITY;
-
+    
+    public AcidRain(float gravity)
+    {
+        GRAVITY = gravity;
+    }
+    
     public void act()
     {
-
+        fall();
     }
-
+    //Causes an object to fall in the foreground and out the bottom protected void fall()
     protected void fall()
-    { 
-
+    {
+        yVelocity += GRAVITY;
+        setLocation(getX(), getY() + (int) yVelocity);
+        removeOutOfBounds(this);
     }
 }
