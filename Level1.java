@@ -38,7 +38,7 @@ public class Level1 extends World
         Door door = new Door();
         addObject(door,1152,48);
         door.setLocation(1165,47);
-        Player player = new Player();
+        Player player = new Player(3, 5.6f, GRAVITY, 3, 3, Level2.class,MUSIC);
         addObject(player,24,756);
         addObject(new Floor(), 600, 800);
         addObject(new BrickWall(), 380, 500);
