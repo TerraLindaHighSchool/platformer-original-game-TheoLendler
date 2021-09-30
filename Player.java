@@ -52,15 +52,83 @@ public class Player extends Actor
      */
     public void act()
     {
-        animator();
-        move(speed);
+        walk();
+        jump();
+        fall();
+        onCollision();
+        gameOver();
     }
     
     public void addedToWorld(World world) {}
     
-    public void walk() {}
-    public void jump() {}
-    public void fall() {}
+    public void walk() 
+    {
+        if(isWalking)
+        {
+            animator();
+        }
+        else
+        {
+            setImage(STANDING_IMAGE);
+            walkIndex = 0;
+        }
+        
+        if(Greenfoot.isKeyDown("right"))
+        {
+            if(isFacingLeft)
+            {
+                mirrorImages();
+            }
+            isWalking = true;
+            isFacingLeft = false;
+            move(speed);
+        }
+        
+        if(Greenfoot.isKeyDown("left"))
+        {
+            if(!isFacingLeft)
+            {
+                mirrorImages();
+            }
+            isWalking = true;
+            isFacingLeft = true;
+            move(-speed);
+        }
+        
+        if(!(Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("left")))
+        {
+            isWalking = false;
+        }
+    }
+    
+    public void jump()
+    {
+        if(Greenfoot.isKeyDown("space") && isOnGround())
+        {
+            yVelocity = JUMP_FORCE;
+            isJumping = true;
+        }
+        
+        if(isJumping && yVelocity > 0)
+        {
+            setLocation(getX(), getY() - (int) yVelocity);
+            yVelocity -=GRAVITY;
+        }
+        else
+        {
+            isJumping = false;
+        }
+    }
+    
+    public void fall() 
+    {
+        if(!isJumping && !isOnGround())
+        {
+            setLocation(getX(), getY() - (int) yVelocity);
+            yVelocity -= GRAVITY;
+        }
+    }
+    
     public void animator()
     {
         if(frame % (15 - 2 * speed) == 0)
@@ -77,11 +145,22 @@ public class Player extends Actor
         }
         frame++;
     }
+    
     public void onCollision() {}
-    public void mirrorImages() {}
+    
+    public void mirrorImages() 
+    {
+        for(int i =0; i < WALK_ANIMATION.length; i++)
+        {
+            WALK_ANIMATION[i].mirrorHorizontally();
+        }
+    }
+    
     public void gameOver() {}
+    
     private boolean isOnGround()
     {
-        return false;
+        Actor ground = getOneObjectAtOffset(0, getImage().getHeight() / 2, Platform.class);
+        return ground !=null;
     }
 }
