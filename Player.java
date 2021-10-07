@@ -34,6 +34,9 @@ public class Player extends Actor
         NEXT_LEVEL = nextLevel;
         MUSIC = music;
         
+        healthCount = maxHealth;
+        health = new Health[maxHealth];
+        
         STANDING_IMAGE = getImage();
         WALK_ANIMATION = new GreenfootImage[]
                          {
@@ -59,7 +62,15 @@ public class Player extends Actor
         gameOver();
     }
     
-    public void addedToWorld(World world) {}
+    public void addedToWorld(World world)
+    {
+        health[0] = new Health();
+        world.addObject(health[0], 30, 36);
+        health[1] = new Health();
+        world.addObject(health[1], 72, 36);
+        health[2] = new Health();
+        world.addObject(health[2], 114, 36);
+    }
     
     public void walk() 
     {
@@ -75,6 +86,11 @@ public class Player extends Actor
         
         if(Greenfoot.isKeyDown("right"))
         {
+            if(!MUSIC.isPlaying())
+            {
+                MUSIC.playLoop();
+            }
+            
             if(isFacingLeft)
             {
                 mirrorImages();
@@ -107,6 +123,7 @@ public class Player extends Actor
         {
             yVelocity = JUMP_FORCE;
             isJumping = true;
+            Greenfoot.playSound("jump.wav");
         }
         
         if(isJumping && yVelocity > 0)
@@ -150,6 +167,7 @@ public class Player extends Actor
     {
         if(isTouching(Door.class))
         {
+            Greenfoot.playSound("door_open.wav");
             World world = null;
             try 
             {
@@ -162,11 +180,15 @@ public class Player extends Actor
               System.out.println("Cannot access class constructor");
             } 
             Greenfoot.setWorld(world);
+            MUSIC.stop();
         }
         
         if(isTouching(Obstacle.class))
         {
             removeTouching(Obstacle.class);
+            getWorld().removeObject(health[healthCount - 1]);
+            healthCount--;
+            Greenfoot.playSound("explosionSmall.wav");
         }
         
         // hit platform but not on ground
@@ -185,7 +207,14 @@ public class Player extends Actor
         }
     }
     
-    public void gameOver() {}
+    public void gameOver()
+    {
+        if(healthCount == 0)
+        {
+            Greenfoot.setWorld(new Level1());
+            MUSIC.stop();
+        }
+    }
     
     private boolean isOnGround()
     {
