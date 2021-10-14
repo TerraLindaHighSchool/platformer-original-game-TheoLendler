@@ -20,7 +20,7 @@ public class AcidRain extends Obstacle
     {
         fall();
     }
-    //Causes an object to fall in the foreground and out the bottom protected void fall()
+    
     protected void fall()
     {
         yVelocity += GRAVITY;

@@ -6,20 +6,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Level1 extends World
+public class Level3 extends World
 {
-    private final float GRAVITY = 0.0667f;
-    private final GreenfootSound MUSIC = new GreenfootSound("zapsplat_024.mp3");
-    private final int SPEED = 3;
+    private final float GRAVITY = 0.04f;
+    private final GreenfootSound MUSIC = new GreenfootSound("incompetech_tribal.mp3");
+    private final int SPEED = 2;
     private final float JUMP_FORCE = 5.6f;
     private final int MAX_HEALTH = 3;
-    private final int MAX_POWERUP = 0;
-    private final Class NEXT_LEVEL = Level2.class;
+    private final int MAX_POWERUP = 3;
+    private final Class NEXT_LEVEL = WinSplash.class;
     /**
      * Constructor for objects of class BrickWorld.
      * 
      */
-    public Level1()
+    public Level3()
     {    
         // Create a new world with 1200x800 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1, false); 
@@ -65,8 +65,7 @@ public class Level1 extends World
     {
         if(Math.random() < 0.0025)
         {
-            addObject(new Rock(GRAVITY), Greenfoot.getRandomNumber(1200), -30);
-            
+            addObject(new AcidRain(GRAVITY), Greenfoot.getRandomNumber(1200), -30);
         }
     }
 }
