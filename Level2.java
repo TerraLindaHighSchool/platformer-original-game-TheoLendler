@@ -43,11 +43,10 @@ public class Level2 extends World
         addObject(door,1152,48);
         door.setLocation(1165,47);
         Player player = new Player(SPEED, JUMP_FORCE, GRAVITY, 
-                           MAX_HEALTH, MAX_POWERUP, NEXT_LEVEL, MUSIC);
+                MAX_HEALTH, MAX_POWERUP, NEXT_LEVEL, MUSIC);
         addObject(player,24,756);
         addObject(new Floor(), 600, 800);
-        addObject(new BrickWall(), 380, 500);
-        addObject(new BrickWall(), 780, 300);       
+        addObject(new BrickWall(), 805,236);       
         addObject(new BrickWall(), 960, 100);
         addObject(new SmBrickWall(), 1114,647);
         addObject(new SmBrickWall(), 880, 600);
@@ -59,6 +58,7 @@ public class Level2 extends World
         addObject(new Bomb(GRAVITY), 1050, 765);
         addObject(new Gem(), 975, 160);
         addObject(new Gem(), 1030, 160);
+        addObject(new SmBrickWall(),396,420);
     }
     
     private void spawn()
@@ -69,4 +69,5 @@ public class Level2 extends World
             addObject(new AcidRain(GRAVITY), Greenfoot.getRandomNumber(1200), -30);
         }
     }
+    
 }
