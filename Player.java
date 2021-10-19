@@ -191,7 +191,10 @@ public class Player extends Actor
             Greenfoot.playSound("explosionSmall.wav");
         }
         
-        
+        if(isTouching(Collectable.class))
+        {
+            removeTouching(Collectable.class);
+        }
         // hit platform but not on ground
         if(isTouching(Platform.class) && !isOnGround())
         {
