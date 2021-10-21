@@ -17,6 +17,7 @@ class.PowerUp.image=gemSm.png
 class.Rock.image=rock.png
 class.SmBrickWall.image=brick_red_quarter.png
 class.TrapDoor.image=brick_red_quarter.png
+class.WinSplash.image=New\ Piskel\ (4).png
 dependency1.from=Level2
 dependency1.to=Door
 dependency1.type=UsesDependency
