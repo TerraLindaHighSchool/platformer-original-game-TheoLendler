@@ -12,7 +12,7 @@ public class Level2 extends World
     private final GreenfootSound MUSIC = new GreenfootSound("incompetech_tribal.mp3");
     private final int SPEED = 4;
     private final float JUMP_FORCE = 8f;
-    private final int MAX_HEALTH = 3;
+    private final int MAX_HEALTH = 6;
     private final int MAX_POWERUP = 3;
     private final Class NEXT_LEVEL = Level3.class;
     /**

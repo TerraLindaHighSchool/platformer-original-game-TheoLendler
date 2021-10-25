@@ -34,7 +34,7 @@ public class Player extends Actor
         NEXT_LEVEL = nextLevel;
         MUSIC = music;
         
-        healthCount = maxHealth;
+        healthCount = 3;
         health = new Health[maxHealth];
         
         STANDING_IMAGE = getImage();
@@ -70,6 +70,12 @@ public class Player extends Actor
         world.addObject(health[1], 72, 36);
         health[2] = new Health();
         world.addObject(health[2], 114, 36);
+        health[3] = new Health();
+        world.addObject(health[3], 156, 36);
+        health[4] = new Health();
+        world.addObject(health[4], 188, 36);
+        health[5] = new Health();
+        world.addObject(health[5], 220, 36);
     }
     
     public void walk() 
@@ -194,6 +200,11 @@ public class Player extends Actor
         if(isTouching(Collectable.class))
         {
             removeTouching(Collectable.class);
+            if(healthCount < 6)
+            {
+                healthCount++;
+                getWorld().addObject(health[healthCount],30 + healthCount * 42,36);
+            }
         }
         // hit platform but not on ground
         if(isTouching(Platform.class) && !isOnGround())
