@@ -12,7 +12,7 @@ public class Level3 extends World
     private final GreenfootSound MUSIC = new GreenfootSound("incompetech_tribal.mp3");
     private final int SPEED = 2;
     private final float JUMP_FORCE = 5.6f;
-    private final int MAX_HEALTH = 6;
+    private final int MAX_HEALTH = 3;
     private final int MAX_POWERUP = 3;
     private final Class NEXT_LEVEL = WinSplash.class;
     /**
@@ -57,7 +57,6 @@ public class Level3 extends World
         addObject(new TrapDoor(), 60, 400);
         addObject(new Bomb(GRAVITY), 465, 115);
         addObject(new Bomb(GRAVITY), 1050, 765);
-        addObject(new Gem(), 975, 160);
         addObject(new Gem(), 1030, 160);
         addObject(new SmBrickWall(),59,612);
     }
